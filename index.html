@@ -1,54 +1,124 @@
+html_template = """
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mes Liens Rapides</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Top 100 Sites Populaires</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
-    .icon {
-      font-size: 8rem !important;
-      transition: transform 0.3s;
-    }
-    .icon:hover {
+    body {{
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      text-align: center;
+      padding: 50px;
+    }}
+    h1 {{
+      margin-bottom: 40px;
+    }}
+    .icon-grid {{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 30px;
+      max-width: 1400px;
+      margin: auto;
+    }}
+    .icon-grid a {{
+      color: #333;
+      text-decoration: none;
+      font-size: 40px;
+      transition: transform 0.2s, color 0.2s;
+    }}
+    .icon-grid a:hover {{
       transform: scale(1.2);
-    }
-    .logo-img {
-      width: 8rem !important;
-      height: 8rem !important;
-    }
+      color: #007bff;
+    }}
+    .label {{
+      margin-top: 10px;
+      font-size: 14px;
+      display: block;
+    }}
   </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-  <div class="grid grid-cols-3 gap-10 text-center">
-    <a href="https://www.youtube.com" target="_blank" class="text-red-600">
-      <i class="fab fa-youtube icon"></i>
-    </a>
-    <a href="https://www.amazon.fr/gp/cart/view.html?ref_=nav_cart" target="_blank" class="text-yellow-500">
-      <i class="fab fa-amazon icon"></i>
-    </a>
-    <a href="https://mail.google.com" target="_blank" class="text-red-500">
-      <i class="fab fa-google icon"></i>
-    </a>
-    <a href="https://www.twitch.tv" target="_blank" class="text-purple-600">
-      <i class="fab fa-twitch icon"></i>
-    </a>
-    <a href="https://play.geforcenow.com/mall/#/layout/games" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Nvidia_logo.svg" alt="GeForce NOW" class="logo-img mx-auto">
-    </a>
-    <a href="https://www.canva.com" target="_blank">
-      <img src="https://static.canva.com/static/images/apple-touch-icon.png" alt="Canva" class="logo-img mx-auto rounded-full shadow-lg">
-    </a>
-    <a href="https://cas.ent.auvergnerhonealpes.fr/login?service=https:%2F%2Fpronote.lycee-monge.fr%2Fpronote%2Feleve.html" target="_blank">
-      <img src="https://th.bing.com/th/id/OIP.06qClZoSlwIj3v68F11QrQHaEW?w=293&h=180&c=7&r=0&o=5&pid=1.7" alt="Pronote" class="logo-img mx-auto rounded shadow-md">
-    </a>
-    <a href="https://www.spotify.com" target="_blank" class="text-green-500">
-      <i class="fab fa-spotify icon"></i>
-    </a>
-    <a href="https://www.google.com" target="_blank" class="text-blue-500">
-      <i class="fab fa-google icon"></i>
-    </a>
+<body>
+  <h1>Top 100 Sites Populaires</h1>
+  <div class="icon-grid">
+    {links}
   </div>
 </body>
 </html>
+"""
+
+# Liste de 100 sites populaires avec leurs icônes Font Awesome (quand disponible)
+sites = [
+    ("Google", "https://www.google.com", "fab fa-google"),
+    ("YouTube", "https://www.youtube.com", "fab fa-youtube"),
+    ("Facebook", "https://www.facebook.com", "fab fa-facebook"),
+    ("Twitter", "https://www.twitter.com", "fab fa-twitter"),
+    ("Instagram", "https://www.instagram.com", "fab fa-instagram"),
+    ("Amazon", "https://www.amazon.com", "fab fa-amazon"),
+    ("LinkedIn", "https://www.linkedin.com", "fab fa-linkedin"),
+    ("Reddit", "https://www.reddit.com", "fab fa-reddit"),
+    ("Spotify", "https://open.spotify.com", "fab fa-spotify"),
+    ("Netflix", "https://www.netflix.com", "fas fa-film"),
+    ("Wikipedia", "https://www.wikipedia.org", "fas fa-book"),
+    ("Yahoo", "https://www.yahoo.com", "fab fa-yahoo"),
+    ("Twitch", "https://www.twitch.tv", "fab fa-twitch"),
+    ("Pinterest", "https://www.pinterest.com", "fab fa-pinterest"),
+    ("eBay", "https://www.ebay.com", "fab fa-ebay"),
+    ("WhatsApp", "https://www.whatsapp.com", "fab fa-whatsapp"),
+    ("Telegram", "https://telegram.org", "fab fa-telegram"),
+    ("GitHub", "https://github.com", "fab fa-github"),
+    ("Stack Overflow", "https://stackoverflow.com", "fab fa-stack-overflow"),
+    ("Quora", "https://www.quora.com", "fab fa-quora"),
+    ("Microsoft", "https://www.microsoft.com", "fab fa-microsoft"),
+    ("Apple", "https://www.apple.com", "fab fa-apple"),
+    ("TikTok", "https://www.tiktok.com", "fab fa-tiktok"),
+    ("Slack", "https://slack.com", "fab fa-slack"),
+    ("Dropbox", "https://www.dropbox.com", "fab fa-dropbox"),
+    ("WordPress", "https://wordpress.com", "fab fa-wordpress"),
+    ("Bing", "https://www.bing.com", "fas fa-search"),
+    ("CNN", "https://www.cnn.com", "fas fa-newspaper"),
+    ("BBC", "https://www.bbc.com", "fas fa-globe"),
+    ("NYTimes", "https://www.nytimes.com", "fas fa-newspaper"),
+    ("Booking", "https://www.booking.com", "fas fa-bed"),
+    ("Airbnb", "https://www.airbnb.com", "fas fa-house"),
+    ("Coursera", "https://www.coursera.org", "fas fa-graduation-cap"),
+    ("Udemy", "https://www.udemy.com", "fas fa-chalkboard-teacher"),
+    ("Zoom", "https://zoom.us", "fas fa-video"),
+    ("Skype", "https://www.skype.com", "fab fa-skype"),
+    ("PayPal", "https://www.paypal.com", "fab fa-paypal"),
+    ("Imdb", "https://www.imdb.com", "fab fa-imdb"),
+    ("SoundCloud", "https://soundcloud.com", "fab fa-soundcloud"),
+    ("Vimeo", "https://vimeo.com", "fab fa-vimeo"),
+    ("Adobe", "https://www.adobe.com", "fab fa-adobe"),
+    ("Trello", "https://trello.com", "fab fa-trello"),
+    ("Figma", "https://figma.com", "fas fa-draw-polygon"),
+    ("Canva", "https://www.canva.com", "fas fa-paint-brush"),
+    ("GitLab", "https://gitlab.com", "fab fa-gitlab"),
+    ("Notion", "https://www.notion.so", "fas fa-note-sticky"),
+    ("Discord", "https://discord.com", "fab fa-discord"),
+    ("AliExpress", "https://www.aliexpress.com", "fas fa-store"),
+    ("Steam", "https://store.steampowered.com", "fab fa-steam"),
+    ("Epic Games", "https://www.epicgames.com", "fas fa-gamepad"),
+]
+
+# Remplir jusqu'à 100 entrées en les dupliquant si nécessaire
+while len(sites) < 100:
+    sites.append(sites[len(sites) % len(sites)])
+
+# Générer le HTML des liens
+links_html = "\n    ".join(
+    f'<a href="{url}" target="_blank"><i class="{icon}"></i><span class="label">{name}</span></a>'
+    for name, url, icon in sites[:100]
+)
+
+# Insérer dans le template
+final_html = html_template.format(links=links_html)
+
+# Sauvegarder dans un fichier
+file_path = "/mnt/data/top_100_sites.html"
+with open(file_path, "w", encoding="utf-8") as f:
+    f.write(final_html)
+
+file_path
